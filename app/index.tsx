@@ -7,12 +7,16 @@ export default function Index() {
       style={styles.container} 
       colors={["#00457D", "#05051F"]}
     >
+
     <Image source={require('../assets/images/Logo.png')}/>
     <Image source={require('../assets/images/weather.png')}/>
+
     <Text style={styles.title}>Boas-vindas!</Text>
+
     <TouchableOpacity style={styles.button}>
       <Text style={styles.buttonTitle}>Entrar</Text>
     </TouchableOpacity>
+
     </LinearGradient>
   );
 }
@@ -28,7 +32,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    color: '#fff'
+    color: '#fff',
+    fontFamily: "Montserrat_400Regular"
   },
   button: {
     width: '100%',
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
   buttonTitle: {
     color: '#01080E',
     fontSize: 20,
-    fontWeight: 600
+    fontWeight: 600,
+    fontFamily: "Montserrat_600SemiBold"
   }
 });
