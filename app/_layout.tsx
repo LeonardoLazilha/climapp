@@ -15,6 +15,7 @@ export default function RootLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="cities" options={{ headerShown: false }} />
+      <Stack.Screen name="[cityName]" options={{ headerShown: false }} />
     </Stack>
   );
 }
