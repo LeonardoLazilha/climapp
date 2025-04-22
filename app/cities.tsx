@@ -1,23 +1,50 @@
-import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Image, Text, StyleSheet, ScrollView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import citiesData from "../data/cities.json";
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+
+// pausa na aula min 6:25
 
 const Cities = () => {
-    console.log(citiesData);
+
+    const [search, setSearch] = useState("");
+    const [filteredCities, setFilteredCities] = useState(citiesData);
+
+    useEffect(() => {
+        const results = citiesData.filter((city) =>
+            city.city.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredCities(results);
+    }, [search]);
+
+
     return (
         <LinearGradient
             colors={["#00457D", "#05051F"]}
             style={styles.container}
         >
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite a cidade"
+                    placeholderTextColor={'#b4b4b4'}
+                    value={search}
+                    onChangeText={setSearch}
+                />
+                <MaterialIcons
+                    name="search" size={18} color={'#fff'} />
+            </View>
             <ScrollView>
                 <View style={styles.scrollList}>
-                    {citiesData.map((city, index) => (
+                    {filteredCities.map((city, index) => (
                         <View key={index} style={styles.listItem}>
-                            <Image style={styles.icon} source={require('../assets/images/6122714.png')}></Image>
-                            <Text style={styles.cityName}>{city.city}</Text>
+                            <Image style={styles.icon} source={require('../assets/images/6122714.png')} />
+                            <Text style={styles.cityName}>
+                                {city.city.replace(", ", " - ")}
+                            </Text>
                             <Text style={styles.cityTemp}>{city.temp}°</Text>
                         </View>
-
                     ))}
                 </View>
             </ScrollView>
@@ -32,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 16,
         gap: 16,
+        paddingTop: 60
     },
     scrollList: {
         gap: 16
@@ -60,5 +88,20 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         resizeMode: 'contain'
+    },
+    inputContainer: {
+        height: 36,
+        width: '100%',
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+        borderRadius: 24,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16
+    },
+    input: {
+        color: '#fff',
+        fontFamily: 'Montserrat_500Medium',
+        fontSize: 16
     }
 });
