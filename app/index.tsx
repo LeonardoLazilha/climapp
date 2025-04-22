@@ -1,7 +1,12 @@
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 
 export default function Index() {
+
+  const router = useRouter()
+
+
   return (
     <LinearGradient 
       style={styles.container} 
@@ -13,7 +18,12 @@ export default function Index() {
 
     <Text style={styles.title}>Boas-vindas!</Text>
 
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity 
+    style={styles.button}
+    onPress={() => {
+      router.push("/cities")
+    }}
+    >
       <Text style={styles.buttonTitle}>Entrar</Text>
     </TouchableOpacity>
 
